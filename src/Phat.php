@@ -11,9 +11,11 @@ class Phat
 
 	}
 
-	public function test() {
+	public function view($output, $data = []) {
 
-		echo '*** PHAT TEST!!! ***';
+
+
+		return $output;
 	}
 
 }
