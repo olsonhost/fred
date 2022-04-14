@@ -1,0 +1,17 @@
+{
+    "name": "olsonhost/phat",
+    "description": "Phat is a template engine for the Yore framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erik Olson",
+            "email": "erik@olson.host"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {"Olsonhost\\Phat\\": "src/"}
+    },
+    "require": {}
+}
