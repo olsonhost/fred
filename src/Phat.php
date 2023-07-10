@@ -1,11 +1,42 @@
 <?php
+/*
+
+ ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ██▀███   █    ██   ██████  ██░ ██
+▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓██ ▒ ██▒ ██  ▓██▒▒██    ▒ ▓██░ ██▒
+▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▓██ ░▄█ ▒▓██  ▒██░░ ▓██▄   ▒██▀▀██░
+▒██░█▀  ▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒██▀▀█▄  ▓▓█  ░██░  ▒   ██▒░▓█ ░██
+░▓█  ▀█▓░██████▒▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░██▓ ▒██▒▒▒█████▓ ▒██████▒▒░▓█▒░██▓
+░▒▓███▀▒░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒
+▒░▒   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░  ░▒ ░ ▒░░░▒░ ░ ░ ░ ░▒  ░ ░ ▒ ░▒░ ░
+ ░    ░   ░ ░    ░   ▒   ░        ░ ░░ ░   ░░   ░  ░░░ ░ ░ ░  ░  ░   ░  ░░ ░
+ ░          ░  ░     ░  ░░ ░      ░  ░      ░        ░           ░   ░  ░  ░
+      ░                  ░
+
+
+
+*/
 
 namespace Olsonhost\Phat;
 
 class Phat
 {
 
-    public $vars = [];
+    protected $vars = [];
+
+    protected $includes = [];
+
+    const BLACKRUSH = "
+ ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ██▀███   █    ██   ██████  ██░ ██
+▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓██ ▒ ██▒ ██  ▓██▒▒██    ▒ ▓██░ ██▒
+▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▓██ ░▄█ ▒▓██  ▒██░░ ▓██▄   ▒██▀▀██░
+▒██░█▀  ▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒██▀▀█▄  ▓▓█  ░██░  ▒   ██▒░▓█ ░██
+░▓█  ▀█▓░██████▒▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░██▓ ▒██▒▒▒█████▓ ▒██████▒▒░▓█▒░██▓
+░▒▓███▀▒░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒
+▒░▒   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░  ░▒ ░ ▒░░░▒░ ░ ░ ░ ░▒  ░ ░ ▒ ░▒░ ░
+ ░    ░   ░ ░    ░   ▒   ░        ░ ░░ ░   ░░   ░  ░░░ ░ ░ ░  ░  ░   ░  ░░ ░
+ ░          ░  ░     ░  ░░ ░      ░  ░      ░        ░           ░   ░  ░  ░
+      ░                  ░
+";
 
     public function __construct()
     {
@@ -15,31 +46,12 @@ class Phat
 
     public function view($output, $data = []) {
 
-        // Copy this to the vendor package source and push to github to update (I think)
-
-        // $this->page = $this->view($this->output, $this->data);
-
-        /*
-         *     public function view($output, $data = []) {
-
-                    $phat = new Phat;
-
-                    $output = $phat->view($output, $data);
-
-         */
-
-        // $output is the final page and $data is the json array which defines the page and may contain phat vars for us
-
-        // $data may also be augmented with additional variables during prior page processing like i don't know what right now
-
         $output = $this->prep($output, $data); // process strings, constants and variables
 
         $output = $this->exec($output, $data); // execute @functions
 
         return $output;
     }
-
-    // example <h1><img src="@asset('images/nl.jpg')"><span style="margin-left:-90px;">Blackrush Entertainment</span></h1>
 
     function prep($output, $data) {
         // step 1, replace all @aphatwelve( with chr(1) + APHATWELVE
@@ -68,6 +80,11 @@ class Phat
 
         } while($continue);
 
+        // Step 2, Lets insert any #variables we may have defined
+
+        foreach ($this->vars as $var => $val) {
+            $output = str_replace('#' . $var, $val, $output);
+        }
 
 
         return str_replace('£¥', '@', $output);
@@ -117,6 +134,12 @@ class Phat
             case 'DATA':
                 //$command = $data[$tail]; // ??
                 $command = 'TODO data var ' . $tail;
+                break;
+            case 'EDIT':
+                $command = "<button class='phat-edit btn btn-success btn-sm' rel='$tail'>Edit</button>";
+                break;
+            case 'BLACKRUSH':
+                $command = "<pre>" . Self::BLACKRUSH . "</pre>";
                 break;
             default:
                 $command = '?' . $head . '?';
