@@ -3,7 +3,7 @@
 @blackrush()
 
 returns
-`
+```
 
  ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ██▀███   █    ██   ██████  ██░ ██
 ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓██ ▒ ██▒ ██  ▓██▒▒██    ▒ ▓██░ ██▒
@@ -15,7 +15,7 @@ returns
  ░    ░   ░ ░    ░   ▒   ░        ░ ░░ ░   ░░   ░  ░░░ ░ ░ ░  ░  ░   ░  ░░ ░
  ░          ░  ░     ░  ░░ ░      ░  ░      ░        ░           ░   ░  ░  ░
       ░                  ░
-`
+```
 
 You can do other stuff too.  Like markdown and several "@" functions designed to work with Yore such as
 
