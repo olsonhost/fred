@@ -139,7 +139,7 @@ class Phat
                 $command = "<button class='phat-edit btn btn-success btn-sm' rel='$tail'>Edit</button>";
                 break;
             case 'BLACKRUSH':
-                $command = "<pre>" . Self::BLACKRUSH . "</pre>";
+                $command = "<pre style='font-size:50%;'>" . Self::BLACKRUSH . "</pre>";
                 break;
             default:
                 $command = '?' . $head . '?';
