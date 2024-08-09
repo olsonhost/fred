@@ -1,4 +1,5 @@
-# phat
+# phat aka Ph@
+### (A portmanteau of Php and @)
 
 @blackrush()
 
@@ -29,3 +30,10 @@ You can do other stuff too.  Like markdown and several "@" functions designed to
 
 #view - returns the path and file name (relative to web root) of the current view
 
+# SQML
+
+# Doors
+
+# Short Codes
+
+# Extending with Modules
