@@ -149,17 +149,18 @@ class Phat
 
                 // SO.. we need to see if any $module classes have a Phat function
                 // or an array?  An array of functions??
-                $command = '';
-                foreach ($this->modules as $module) {
-                    // Check if the phat_ method exists in the module
-                    if (method_exists($module, 'phat_' . $head)) {
-                        // Call the method and pass $tail as the argument
-                        $command .= $module->$head($tail);
-                        // If more than 1 module has a Phat function then we're going to call them all!
+                $command = null;
+                if (gettype($this->modules) == 'array') {
+                    foreach ($this->modules as $module) {
+                        // Check if the phat_ method exists in the module
+                        if (method_exists($module, 'phat_' . $head)) {
+                            // Call the method and pass $tail as the argument
+                            $command .= $module->$head($tail);
+                            // If more than 1 module has a Phat function then we're going to call them all!
+                        }
                     }
                 }
-
-                $command = '?' . $head . '?';
+                if ($command == null) $command = '?' . $head . '?';
         }
 
 
