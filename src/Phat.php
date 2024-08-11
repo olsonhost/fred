@@ -25,6 +25,8 @@ class Phat
 
     protected $includes = [];
 
+    protected $modules;
+
     const BLACKRUSH = "
  ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ██▀███   █    ██   ██████  ██░ ██
 ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓██ ▒ ██▒ ██  ▓██▒▒██    ▒ ▓██░ ██▒
@@ -44,7 +46,9 @@ class Phat
 
     }
 
-    public function view($output, $data = []) {
+    public function view($output, $data = [], $modules = false) {
+
+        $this->modules = $modules; // Modules may contain Phat extensions that we will look for
 
         $output = $this->prep($output, $data); // process strings, constants and variables
 
@@ -118,7 +122,7 @@ class Phat
 
         $tail = $expr[1];
 
-        // TODO: handle litereals, vars, etc.  Right now just assuming a quoted string and that's all
+        // TODO: handle literals, vars, etc.  Right now just assuming a quoted string and that's all
         $tail = str_replace(['"', "'"], '', $tail); // just remove quotes
 
         switch($head) {
@@ -142,6 +146,19 @@ class Phat
                 $command = "<pre style='font-size:50%;'>" . Self::BLACKRUSH . "</pre>";
                 break;
             default:
+
+                // SO.. we need to see if any $module classes have a Phat function
+                // or an array?  An array of functions??
+                $command = '';
+                foreach ($this->modules as $module) {
+                    // Check if the phat_ method exists in the module
+                    if (method_exists($module, 'phat_' . $head)) {
+                        // Call the method and pass $tail as the argument
+                        $command .= $module->$head($tail);
+                        // If more than 1 module has a Phat function then we're going to call them all!
+                    }
+                }
+
                 $command = '?' . $head . '?';
         }
 
