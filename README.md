@@ -1,6 +1,21 @@
 # phat aka Ph@
 ### (A portmanteau of Php and @)
 
+# I'M GOING TO CHANGE THE NAME OF THIS TO "FRED"
+### This tool is going to be platform agnostic so we won't be parting Php in it
+#### Hence the name "Phat" or "Ph@", while terrible, don't relly apply to this things anymore
+
+##### And since it has the syntax of ye old "Framework Fred" of Yore (see what I did there?) I think that "Fred" is a cool name for this.
+
+###### Also my frog is named Fred
+
+* And I have a brother named Fred
+  * Somewhere
+    * In Texas I think
+      * He has a wife, you know
+
+
+
 @blackrush()
 
 returns
