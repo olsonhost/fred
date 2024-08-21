@@ -2,7 +2,7 @@
 ### (A portmanteau of Php and @)
 
 # I'M GOING TO CHANGE THE NAME OF THIS TO "FRED"
-### This tool is going to be platform agnostic so we won't be parting Php in it
+### This tool is going to be platform agnostic so we won't be parsing Php in it
 #### Hence the name "Phat" or "Ph@", while terrible, don't relly apply to this things anymore
 
 ##### And since it has the syntax of ye old "Framework Fred" of Yore (see what I did there?) I think that "Fred" is a cool name for this.
