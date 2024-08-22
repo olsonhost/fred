@@ -1,6 +1,6 @@
 {
     "name": "olsonhost/fred",
-    "description": "Phat is a template engine for the Yore framework",
+    "description": "Fred is a template engine for the Yore framework",
     "type": "library",
     "license": "MIT",
     "authors": [

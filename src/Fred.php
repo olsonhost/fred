@@ -16,9 +16,9 @@
 
 */
 
-namespace Olsonhost\Phat;
+namespace Olsonhost\Fred;
 
-class Phat
+class Fred
 {
 
     protected $vars = [];
@@ -48,7 +48,7 @@ class Phat
 
     public function view($output, $data = [], $modules = false) {
 
-        $this->modules = $modules; // Modules may contain Phat extensions that we will look for
+        $this->modules = $modules; // Modules may contain Fred extensions that we will look for
 
         $output = $this->prep($output, $data); // process strings, constants and variables
 
@@ -133,30 +133,30 @@ class Phat
                 $command = $data->body;
                 break;
             case 'EXAMPLE':
-                $command = $data->example_phat_var;
+                $command = $data->example_fred_var;
                 break;
             case 'DATA':
                 //$command = $data[$tail]; // ??
                 $command = 'TODO data var ' . $tail;
                 break;
             case 'EDIT':
-                $command = "<button class='phat-edit btn btn-success btn-sm' rel='$tail'>Edit</button>";
+                $command = "<button class='fred-edit btn btn-success btn-sm' rel='$tail'>Edit</button>";
                 break;
             case 'BLACKRUSH':
                 $command = "<pre style='font-size:50%;'>" . Self::BLACKRUSH . "</pre>";
                 break;
             default:
 
-                // SO.. we need to see if any $module classes have a Phat function
+                // SO.. we need to see if any $module classes have a Fred function
                 // or an array?  An array of functions??
                 $command = null;
                 if (gettype($this->modules) == 'array') {
                     foreach ($this->modules as $module) {
-                        // Check if the phat_ method exists in the module
-                        if (method_exists($module, 'phat_' . $head)) {
+                        // Check if the fred_ method exists in the module
+                        if (method_exists($module, 'fred_' . $head)) {
                             // Call the method and pass $tail as the argument
                             $command .= $module->$head($tail);
-                            // If more than 1 module has a Phat function then we're going to call them all!
+                            // If more than 1 module has a fred_ function then we're going to call them all!
                         }
                     }
                 }
